@@ -101,19 +101,21 @@ let timeLeft = 75;
 }*/
 let timerInterval;
 
-function startTime() {
+function startTime(startImmediately) {
     runTimer();
+    if (startImmediately) {
     timerInterval = setInterval(function() {
         runTimer();
         timeCut();
     }, 1000);
+}
 
     function runTimer() {
         timer.textContent = 'Time: ' + timeLeft;
         if (timeLeft <= 0) {
             timeUp();
         }
-    }
+        }
 
     function timeCut() {
         timeLeft--;
@@ -122,6 +124,7 @@ function startTime() {
         }
     }
 }
+startTime(false);
 
 function timeUp() {
     clearInterval(timerInterval);
@@ -163,11 +166,15 @@ startBttn.id = 'startBttn';
 start.appendChild(startBttn);
 startBttn.addEventListener('click', startQuiz);
 
+
+
 function startQuiz() {
     start.style.display = "none";
     quiz.style.display = "block";
-    startTime();
+
     generateQuestion();
+
+    startTime(true);
 }
 
 function renderScore() {
@@ -220,26 +227,40 @@ function updateScore() {
     scoreTitle.textContent = 'High Scores';
     scorePage.appendChild(scoreTitle);
     
-    function renderScoreList() {
-        const scoreList = document.createElement('ol');
-        scorePage.appendChild(scoreList);
-        scoreList.innerHTML = '';
-        localStorage.getItem('highScores');
-        JSON.parse(jsonData);
-        const listItem = document.createElement('li');
-        listItem.textContent = data.initials + ' - ' + data.score;
-        scoreList.appendChild(listItem);
+function renderScoreList() {
+    const scoreList = document.createElement('ol');
+    scorePage.appendChild(scoreList);
+    scoreList.innerHTML = '';
+    localStorage.getItem('highScores');
+    JSON.parse(jsonData);
+    const listItem = document.createElement('li');
+    listItem.textContent = data.initials + ' - ' + data.score;
+    scoreList.appendChild(listItem);
 
-        const goBackBttn = document.createElement('button');
+const goBackBttn = document.createElement('button');
     goBackBttn.textContent = 'Go Back';
     goBackBttn.id = 'goBackBttn';
     scorePage.appendChild(goBackBttn);
+    
+    goBackBttn.addEventListener('click', reStart);
+    function reStart() {
+        clearInterval(timerInterval);
+        timeLeft = 75; //seconds
+    
+        quiz.style.display = 'none';
+        scorePage.style.display = 'none';
+        //timer.style.display = 'none';
+        start.style.display = 'block';
 
+        score = 0;
+        currentQuestionIndex = 0;
+        startTime(false);
+    }
     const clearHighScores = document.createElement('button');
     clearHighScores.textContent = 'Clear High Scores';
     clearHighScores.id = 'clearHighScores';
     scorePage.appendChild(clearHighScores);
-    }
+}
 
 // Break Down
 // Select all HTML elements
