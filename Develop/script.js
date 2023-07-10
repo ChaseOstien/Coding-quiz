@@ -222,10 +222,20 @@ function updateScore() {
     
         renderScoreList();
     }
-    
+
     const scoreTitle = document.createElement('h3');
     scoreTitle.textContent = 'High Scores';
     scorePage.appendChild(scoreTitle);
+
+    const goBackBttn = document.createElement('button');
+    goBackBttn.textContent = 'Go Back';
+    goBackBttn.id = 'goBackBttn';
+    scorePage.appendChild(goBackBttn);
+
+    const clearHighScores = document.createElement('button');
+    clearHighScores.textContent = 'Clear High Scores';
+    clearHighScores.id = 'clearHighScores';
+    scorePage.appendChild(clearHighScores);
     
 function renderScoreList() {
     const scoreList = document.createElement('ol');
@@ -236,11 +246,6 @@ function renderScoreList() {
     const listItem = document.createElement('li');
     listItem.textContent = data.initials + ' - ' + data.score;
     scoreList.appendChild(listItem);
-
-const goBackBttn = document.createElement('button');
-    goBackBttn.textContent = 'Go Back';
-    goBackBttn.id = 'goBackBttn';
-    scorePage.appendChild(goBackBttn);
     
     goBackBttn.addEventListener('click', reStart);
     function reStart() {
@@ -256,11 +261,15 @@ const goBackBttn = document.createElement('button');
         currentQuestionIndex = 0;
         startTime(false);
     }
-    const clearHighScores = document.createElement('button');
-    clearHighScores.textContent = 'Clear High Scores';
-    clearHighScores.id = 'clearHighScores';
-    scorePage.appendChild(clearHighScores);
+
+    clearHighScores.addEventListener('click', clearScores);
+    function clearScores() {
+        scoreList.innerHTML = '';
+    }
+
 }
+
+
 
 // Break Down
 // Select all HTML elements
