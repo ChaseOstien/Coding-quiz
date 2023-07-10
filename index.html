@@ -8,14 +8,14 @@
 </head>
 <body>
     <div class="app">
-        <div id="start"> Start Quiz! </div>
+        <div id="highScores">
+            <div id="viewScores"> <a href='#scorePage'>View high scores</a></div>
+        </div>
+        <div id="start">Time: 75</div>
+        <div id="timer">
+            <div id="counter"></div>
+        </div>
         <div id="quiz" style="display:none;">
-            <div id="highScores">
-                <div id="viewScores"> View high scores </div>
-            </div>
-            <div id="timer">
-                <div id="counter"> 75 </div>
-            </div>
             <div id="question"> <p> Question </p> </div>
                 <div id="choices">
                     <div class="choice" id="A" onclick="checkAnswer('A')"> A </div>
@@ -26,7 +26,7 @@
                 <div id="verification"></div>
         </div>
         <div id="allDone" style="display:none;"></div>
-        <div id="scorePage>" style="display:none;"></div>
+        <div id="scorePage" style="display:none;"></div>
     </div>
 <script src="./Develop/script.js"></script>
 </body>
