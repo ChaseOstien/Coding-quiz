@@ -11,6 +11,7 @@ const ChoiceD = document.getElementById('D');
 const verification = document.getElementById('verification');
 const allDone = document.getElementById('allDone');
 const scorePage = document.getElementById('scorePage');
+const viewScores = document.getElementById('viewScores');
 
 // Create questions array
 let questions = [
@@ -152,6 +153,14 @@ function checkAnswer(answer) {
         renderScore();
     }
 }
+
+viewScores.addEventListener('click', viewScore);
+function viewScore() {
+    quiz.style.display = 'none';
+    scorePage.style.display = 'block';
+    start.style.display = 'none';
+}
+
 const startTitle = document.createElement('h1');
 startTitle.textContent = 'Coding Quiz Challenge';
 start.appendChild(startTitle);
