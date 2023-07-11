@@ -152,14 +152,14 @@ function checkAnswer(answer) {
         renderScore();
     }
 }
-const startTitle = document.createElement('h2');
+const startTitle = document.createElement('h1');
 startTitle.textContent = 'Coding Quiz Challenge';
 start.appendChild(startTitle);
-startTitle.classList.add('text-center', 'my-5', 'p-2');
+startTitle.classList.add('text-center', 'my-3', 'p-2', 'h1');
 
-const startP = document.createElement('p');
+const startP = document.createElement('h3');
 startP.textContent = 'Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!';
-startTitle.appendChild(startP);
+start.appendChild(startP);
 startP.classList.add('p-4');
 
 const startBttn = document.createElement('button');
