@@ -16,42 +16,42 @@ const scorePage = document.getElementById('scorePage');
 let questions = [
     { 
         question: 'Commonly used data types DO Not include:',
-        choiceA: 'strings',
-        choiceB: 'booleans',
-        choiceC: 'alerts',
-        ChoiceD: 'numbers',
+        choiceA: '1. strings',
+        choiceB: '2. booleans',
+        choiceC: '3. alerts',
+        ChoiceD: '4. numbers',
         correct: 'C'
     },
     {
         question: 'The condition in an if / else statement is enclosed with _______.',
-        choiceA: 'quotes',
-        choiceB: 'curly brackets',
-        choiceC: 'parenthesis',
-        ChoiceD: 'square brackets',
+        choiceA: '1. quotes',
+        choiceB: '2. curly brackets',
+        choiceC: '3. parenthesis',
+        ChoiceD: '4. square brackets',
         correct: 'C'
     },
     {
         question: 'Arrays in JavaScript can be used to store _________.',
-        choiceA: 'numbers and strings',
-        choiceB: 'other arrays',
-        choiceC: 'booleans',
-        ChoiceD: 'all of the above',
+        choiceA: '1. numbers and strings',
+        choiceB: '2. other arrays',
+        choiceC: '3. booleans',
+        ChoiceD: '4. all of the above',
         correct: 'D' 
     },
     {
         question: 'String values must be enclosed within ______ when being assigned to variables.',
-        choiceA: 'commas',
-        choiceB: 'curly brackets',
-        choiceC: 'quotes',
-        ChoiceD: 'parenthesis',
+        choiceA: '1. commas',
+        choiceB: '2. curly brackets',
+        choiceC: '3. quotes',
+        ChoiceD: '4. parenthesis',
         correct: 'C' 
     },
     {
         question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
-        choiceA: 'JavaScript',
-        choiceB: 'terminal/bach',
-        choiceC: 'for loops',
-        ChoiceD: 'console.log',
+        choiceA: '1. JavaScript',
+        choiceB: '2. terminal/bach',
+        choiceC: '3. for loops',
+        ChoiceD: '4. console.log',
         correct: 'D' 
     }
 ];
