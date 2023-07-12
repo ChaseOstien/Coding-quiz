@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+}
+body {
+    background: #093145;
+}
+
+.bg-color {
+    background-color: #CBC3E3;
+}
+
+.answer-flag {
+    opacity: 0.5;
+    border-top: 1px solid black;
+    margin-top: 20px;
+}
+
