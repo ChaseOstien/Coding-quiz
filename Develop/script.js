@@ -73,33 +73,31 @@ function generateQuestion() {
 currentQuestionIndex = 0;
 generateQuestion();
 
-//currentQuestionIndex++
-//generateQuestion();
+// Generate correct and wrong flags
+let correct;
+correct = document.createElement('h3');
 
-// Check answers.
 function correctAnswer() {
-    // generate correct message with line above here
+    
+    correct.textContent = 'Correct!';
+    quiz.appendChild(correct);
+    correct.classList.add('answer-flag');
+
+    if (currentQuestionIndex >= questionIndex) {
+        allDone.appendChild(correct);
+    }
 }
 
+// Updates text in correct element
 function wrongAnswer() {
-    // generate wrong message with line above it here
+    correct.textContent = 'Wrong!';
+    if (currentQuestionIndex >= questionIndex) {
+        allDone.appendChild(correct);
+    }
 }
 
-// Timer
+// Timer for application
 let timeLeft = 75;
-/*function runTimer() {
-    timer.textContent = 'Time: ' + timeLeft;
-    if (timeLeft <= 0) {
-        timeUp();
-    }
-}*/
-
-/*function timeCut() {
-    timeLeft--;
-    if (timeLeft <= 0) {
-        timeUp();
-    }
-}*/
 let timerInterval;
 
 function startTime(startImmediately) {
@@ -129,11 +127,12 @@ startTime(false);
 
 function timeUp() {
     clearInterval(timerInterval);
-    quiz.style.display = 'none';
-    allDone.style.display = 'block';
-    renderScore();
+        quiz.style.display = 'none';
+        allDone.style.display = 'block';
+        renderScore();
 }
 
+// Checks answers, increments score and questions, ends quiz section if time up. 
 let score = 0;
 function checkAnswer(answer) {
     const selectedAnswer = answer;
@@ -154,13 +153,16 @@ function checkAnswer(answer) {
     }
 }
 
+// View score button
 viewScores.addEventListener('click', viewScore);
 function viewScore() {
     quiz.style.display = 'none';
+    allDone.style.display = 'none';
     scorePage.style.display = 'block';
     start.style.display = 'none';
 }
 
+// Create elements on start page
 const startTitle = document.createElement('h1');
 startTitle.textContent = 'Coding Quiz Challenge';
 start.appendChild(startTitle);
@@ -178,17 +180,15 @@ startP.appendChild(startBttn);
 startBttn.addEventListener('click', startQuiz);
 startBttn.classList.add('btn', 'btn-primary', 'd-flex', 'mx-auto', 'my-5');
 
-
-
+// Starts quiz
 function startQuiz() {
     start.style.display = "none";
     quiz.style.display = "block";
-
     generateQuestion();
-
     startTime(true);
 }
 
+// Jumps to the score/input initials page if all questions are answered or time runs out. 
 function renderScore() {
     if (currentQuestionIndex >= questionIndex || timeLeft <= 0) {
         quiz.style.display = "none";
@@ -196,59 +196,68 @@ function renderScore() {
     }
 }
 
-const allDoneHeader = document.createElement('h3');
+// creates elements and updates score on all done page.
+const allDoneHeader = document.createElement('h1');
     allDoneHeader.textContent = 'All Done!';
     allDone.appendChild(allDoneHeader);
+    allDoneHeader.classList.add('text-middle');
 
 function updateScore() {
     scoreUpdate.textContent = 'Your final score is ' + score + '.';
 }
-    const scoreUpdate = document.createElement('p');
-    scoreUpdate.textContent = 'Your final score is ' + score + '.';
-    allDone.appendChild(scoreUpdate);
+const scoreUpdate = document.createElement('h3');
+scoreUpdate.textContent = 'Your final score is ' + score + '.';
+allDone.appendChild(scoreUpdate);
     
-    const initialsEntry = document.createElement('p');
-    initialsEntry.textContent = 'Enter initials:';
-    allDone.appendChild(initialsEntry);
+const initialsEntry = document.createElement('h3');
+initialsEntry.textContent = 'Enter initials:';
+allDone.appendChild(initialsEntry);
 
-    const inputBox = document.createElement('input');
-    inputBox.setAttribute('type', 'text');
-    inputBox.id = 'inputBox';
-    allDone.appendChild(inputBox);
+const inputBox = document.createElement('input');
+inputBox.setAttribute('type', 'text');
+inputBox.id = 'inputBox';
+allDone.appendChild(inputBox);
+inputBox.classList.add('m-3');
 
-    const submitBttn = document.createElement('button');
-    submitBttn.textContent = 'Submit';
-    submitBttn.id = 'submitBttn';
-    allDone.appendChild(submitBttn);
-    submitBttn.addEventListener('click', handleSubmit);
+const submitBttn = document.createElement('button');
+submitBttn.textContent = 'Submit';
+submitBttn.id = 'submitBttn';
+allDone.appendChild(submitBttn);
+submitBttn.addEventListener('click', handleSubmit);
+submitBttn.classList.add('btn', 'btn-primary', 'm-1');
 
-    let jsonData;
-    let data;
-    function handleSubmit() {
-        const initials = inputBox.value;
-        data = { initials, score };
-        jsonData = JSON.stringify(data);
-        localStorage.setItem('highScores', jsonData);
-        allDone.style.display = 'none';
-        scorePage.style.display = "block";
+    // Creates local storage key value pairs.
+let jsonData;
+let data;
+function handleSubmit() {
+    const initials = inputBox.value;
+    data = { initials, score };
+    jsonData = JSON.stringify(data);
+    localStorage.setItem('highScores', jsonData);
+    allDone.style.display = 'none';
+    scorePage.style.display = "block";
     
-        renderScoreList();
-    }
+    renderScoreList();
+}
 
-    const scoreTitle = document.createElement('h3');
-    scoreTitle.textContent = 'High Scores';
-    scorePage.appendChild(scoreTitle);
+// Creates high hscore page elements.
+const scoreTitle = document.createElement('h1');
+scoreTitle.textContent = 'High Scores';
+scorePage.appendChild(scoreTitle);
 
-    const goBackBttn = document.createElement('button');
-    goBackBttn.textContent = 'Go Back';
-    goBackBttn.id = 'goBackBttn';
-    scorePage.appendChild(goBackBttn);
+const goBackBttn = document.createElement('button');
+goBackBttn.textContent = 'Go Back';
+goBackBttn.id = 'goBackBttn';
+scorePage.appendChild(goBackBttn);
+goBackBttn.classList.add('btn', 'btn-primary', 'm-1');
 
-    const clearHighScores = document.createElement('button');
-    clearHighScores.textContent = 'Clear High Scores';
-    clearHighScores.id = 'clearHighScores';
-    scorePage.appendChild(clearHighScores);
-    
+const clearHighScores = document.createElement('button');
+clearHighScores.textContent = 'Clear High Scores';
+clearHighScores.id = 'clearHighScores';
+scorePage.appendChild(clearHighScores);
+clearHighScores.classList.add('btn', 'btn-primary', 'm-1');
+
+// Renders the high score list from local storage. 
 function renderScoreList() {
     const scoreList = document.createElement('ol');
     scorePage.appendChild(scoreList);
@@ -258,7 +267,10 @@ function renderScoreList() {
     const listItem = document.createElement('li');
     listItem.textContent = data.initials + ' - ' + data.score;
     scoreList.appendChild(listItem);
+    listItem.id="listItem";
+    listItem.classList.add('m-2', 'bg-color');
     
+    // Adds functionality to the 'go back' button on the high scores page.
     goBackBttn.addEventListener('click', reStart);
     function reStart() {
         clearInterval(timerInterval);
@@ -266,7 +278,6 @@ function renderScoreList() {
     
         quiz.style.display = 'none';
         scorePage.style.display = 'none';
-        //timer.style.display = 'none';
         start.style.display = 'block';
 
         score = 0;
@@ -274,11 +285,11 @@ function renderScoreList() {
         startTime(false);
     }
 
+    // Adds functionality to clear high scores button.
     clearHighScores.addEventListener('click', clearScores);
     function clearScores() {
         scoreList.innerHTML = '';
     }
-
 }
 
 
